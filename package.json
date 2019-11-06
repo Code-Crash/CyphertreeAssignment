@@ -1,6 +1,10 @@
 {
   "name": "cyphertree-assignment",
   "version": "0.0.0",
+  "engines": {
+    "node": "10.16.0",
+    "npm": ">=6"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
