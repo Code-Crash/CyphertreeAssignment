@@ -1,0 +1,28 @@
+<kendo-grid [data]="gridView" [pageSize]="pageSize" [skip]="skip" [pageable]="true" (pageChange)="pageChange($event)"
+  [sortable]="{ allowUnsort: allowUnsort, mode: 'single'}" (dataStateChange)="dataStateChange($event)" [sort]="sort"
+  [filterable]="true" [filter]="state.filter" (sortChange)="sortChange($event)" (cellClick)="cellClick($event)">
+  <kendo-grid-column field="ID" title="ID"></kendo-grid-column>
+  <kendo-grid-column field="Images" title="Thumbnail" [filterable]="false">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <img src="{{ dataItem.Images[0] }}" height="50" width="50" />
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="Title" title="Name"></kendo-grid-column>
+  <kendo-grid-column field="Genre" title="Genre"></kendo-grid-column>
+  <kendo-grid-column field="imdbRating" title="Rating"></kendo-grid-column>
+  <div *kendoGridDetailTemplate="let dataItem">
+    <app-movie [movie]="dataItem"></app-movie>
+  </div>
+</kendo-grid>
+
+
+<kendo-dialog title="{{selected.Title}}" *ngIf="opened" (close)="close('cancel')" [minWidth]="250" [width]="450">
+  <div *ngFor="let k of serializedObject(selected)">
+    <div>
+      <label>{{ k.key }}: </label><span>{{ k.value }}</span>
+    </div>
+  </div>
+  <kendo-dialog-actions>
+    <button kendoButton (click)="close('ok')" primary="true">Ok</button>
+  </kendo-dialog-actions>
+</kendo-dialog>
